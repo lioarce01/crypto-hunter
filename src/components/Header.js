@@ -1,4 +1,5 @@
 import React from 'react'
+import LogoCH from '../images/LogoCH.png'
 import {
   AppBar,
   Container,
@@ -18,7 +19,7 @@ import { CryptoState } from '../CryptoContext';
 const useStyles = makeStyles(() => ({
   title: {
     flex: 1,
-    color: 'gold',
+    color: '#white',
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     cursor: 'pointer',
@@ -46,12 +47,20 @@ const Header = () => {
     <AppBar color='transparent' position='static'>
       <Container>
         <Toolbar>
+        <img 
+          src={LogoCH} 
+          alt='logo'
+              style={{
+                width: 60,
+                padding: 10,
+              }}
+            />
           <Typography 
             onClick={() => navigate('/')}
             className={classes.title}
             variant='h6'
             >
-              Crypto Hunter
+              CRYPTO HUNTER
             </Typography>
 
           <Select
