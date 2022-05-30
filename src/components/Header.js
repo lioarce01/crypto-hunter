@@ -1,5 +1,5 @@
-import React from 'react'
-import LogoCH from '../images/LogoCH.png'
+import React from "react";
+import LogoCH from "../images/LogoCH.png";
 import {
   AppBar,
   Container,
@@ -13,74 +13,76 @@ import {
   makeStyles,
   ThemeProvider,
 } from "@material-ui/core/styles";
-import { useNavigate } from 'react-router-dom'
-import { CryptoState } from '../CryptoContext';
+import { useNavigate } from "react-router-dom";
+import { CryptoState } from "../CryptoContext";
+import AuthModal from "./Authentication/AuthModal";
+import UserSidebar from "./Authentication/UserSidebar";
 
 const useStyles = makeStyles(() => ({
   title: {
     flex: 1,
-    color: '#white',
-    fontFamily: 'Montserrat',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-  }
-}))
+    color: "#white",
+    fontFamily: "Montserrat",
+    fontWeight: "bold",
+    cursor: "pointer",
+  },
+}));
 
 const darkTheme = createTheme({
   palette: {
     primary: {
-      main: '#fff',
+      main: "#fff",
     },
-    type: 'dark',
+    type: "dark",
   },
-})
+});
 
 const Header = () => {
-  const classes = useStyles()
-  const navigate = useNavigate()
+  const classes = useStyles();
+  const navigate = useNavigate();
 
-  const { currency, setCurrency} = CryptoState()
-
+  const { currency, setCurrency, user } = CryptoState();
 
   return (
     <ThemeProvider theme={darkTheme}>
-    <AppBar color='transparent' position='static'>
-      <Container>
-        <Toolbar>
-        <img 
-          src={LogoCH} 
-          alt='logo'
+      <AppBar color="transparent" position="static">
+        <Container>
+          <Toolbar>
+            <img
+              src={LogoCH}
+              alt="logo"
               style={{
                 width: 60,
                 padding: 10,
               }}
             />
-          <Typography 
-            onClick={() => navigate('/')}
-            className={classes.title}
-            variant='h6'
+            <Typography
+              onClick={() => navigate("/")}
+              className={classes.title}
+              variant="h6"
             >
               CRYPTO HUNTER
             </Typography>
 
-          <Select
-            variant='outlined' 
-            style={{
-              width: 100,
-              height: 40,
-              marginRight: 15,
-            }}
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
+            <Select
+              variant="outlined"
+              style={{
+                width: 100,
+                height: 40,
+                marginRight: 15,
+              }}
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
             >
-            <MenuItem value={'USD'}>USD</MenuItem>
-            <MenuItem value={'INR'}>INR</MenuItem>
-          </Select>
-        </Toolbar>
-      </Container>
-    </AppBar>
+              <MenuItem value={"USD"}>USD</MenuItem>
+              <MenuItem value={"INR"}>INR</MenuItem>
+            </Select>
+            {user ? <UserSidebar /> : <AuthModal />}
+          </Toolbar>
+        </Container>
+      </AppBar>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

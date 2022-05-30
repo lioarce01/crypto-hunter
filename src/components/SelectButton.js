@@ -27,10 +27,7 @@ const SelectButton = ({ children, selected, onClick }) => {
 
   return (
     <div>
-      <span
-        onClick={onClick}
-        className={classes.selectbutton}
-      >
+      <span onClick={onClick} className={classes.selectbutton}>
         {children}
       </span>
     </div>
